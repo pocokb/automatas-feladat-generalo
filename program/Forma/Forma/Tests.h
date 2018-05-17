@@ -1,0 +1,27 @@
+#pragma once
+namespace Tests{
+	//void runAll();
+	void DFACounter();
+	void DFAComplement();
+	void DFAToRegLang();
+	void RegLangToDFA();
+	void testRegConv();
+	void testMain();
+	void testLancMent();
+	void testDFAAnd();
+	void testNFAToDFA();
+	void testMinimize();
+	void testCFGen();
+	void testEpsilonMent();
+	void testAppend();
+	void testCfRandom();
+	void testOrBug();
+	void testfoldDFAonDFA();
+	void allFollowesBy();
+	void accepts();
+	void everyN();
+	void occurance();
+	void reachedGoalNTimes();
+	void testBugNew();
+	void TestEquals();
+}

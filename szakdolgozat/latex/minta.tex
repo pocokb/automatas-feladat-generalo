@@ -1,0 +1,319 @@
+% LaTeX mintafájl szakdolgozat és diplomamunkáknak az
+% SZTE Informatikai Tanszekcsoportja által megkövetelt
+% formai követelményeinek megvalósításához
+% Modositva: 2011.04.28 Nemeth L. Zoltan
+% A fájl használatához szükséges a magyar.ldf 2005/05/12 v1.5-ös vagy későbbi verziója
+% ez letölthető a http://www.math.bme.hu/latex/ weblapról, a magyar nyelvű szedéshez
+% Hasznos információk, linekek, LaTeX leirasok a www.latex.lap.hu weboldalon vannak.
+%
+
+
+\documentclass[12pt]{report}
+
+%Magyar nyelvi támogatás (Babel 3.7 vagy későbbi kell!)
+\def\magyarOptions{defaults=hu-min}
+\usepackage[magyar]{babel}
+
+%Az ékezetes betűk használatához:
+\usepackage{t1enc}% ékezetes szavak automatikus elválasztásához
+\usepackage[utf8]{inputenc}% ékezetes szavak beviteléhez
+
+% A formai kovetelmenyekben megkövetelt Times betűtípus hasznalata:
+\usepackage{times}
+\usepackage{verbatim}
+
+%Az AMS csomagjai
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+%A fejléc láblécek kialakításához:
+\usepackage{fancyhdr}
+
+%Természetesen további csomagok is használhatók,
+%például ábrák beillesztéséhez a graphix és a psfrag,
+%ha nincs rájuk szükség természetesen kihagyhatók.
+\usepackage{graphicx}
+\usepackage{psfrag}
+
+\usepackage{todonotes}
+
+%Tételszerű környezetek definiálhatók, ezek most fejezetenkent egyutt szamozodnak, pl.
+\newtheorem{tét}{Tétel}[chapter]
+\newtheorem{defi}[tét]{Definíció}
+\newtheorem{lemma}[tét]{Lemma}
+\newtheorem{áll}[tét]{Állítás}
+\newtheorem{köv}[tét]{Következmény}
+
+%Ha a megjegyzések és a példak szövegét nem akarjuk dőlten szedni, akkor
+%az alábbi parancs után kell őket definiální:
+\theoremstyle{definition}
+\newtheorem{megj}[tét]{Megjegyzés}
+\newtheorem{pld}[tét]{Példa}
+
+%Margók:
+\hoffset -1in
+\voffset -1in
+\oddsidemargin 35mm
+\textwidth 150mm
+\topmargin 15mm
+\headheight 10mm
+\headsep 5mm
+\textheight 237mm
+
+%Makrók:
+\newcommand{\n}{\mathrm{n}}
+\newcommand{\csere}{\mathrm{csere}}
+\newcommand{\pre}{\mathrm{pre}}
+\newcommand{\suf}{\mathrm{suf}}
+\newcommand{\RKIF}{\mathrm{RKIF}}
+\newcommand{\RESZKIF}{\mathrm{RESZKIF}}
+\newcommand{\rk}[1]{reguláris kifejezés#1}
+\newcommand{\fkrj}[1]{FKR-jellemezhető#1}
+\newcommand{\emsz}[1]{Egyenletek megoldásainak szabály#1}
+\newcommand{\uszt}[1]{üres szó tulajdonság#1}
+\newcommand{\Rk}[1]{|\!| #1 |\!|}
+\newcommand{\z}{|\!|}
+
+\begin{document}
+
+%A FEJEZETEK KEZDŐOLDALAINAK FEJ ES LÁBLÉCE:
+%a plain oldalstílust kell átdefiniálni, hogy ott ne legyen fejléc:
+\fancypagestyle{plain}{%
+%ez mindent töröl:
+\fancyhf{}
+% a láblécbe jobboldalra kerüljön az oldalszám:
+\fancyfoot[R]{\thepage}
+%elválasztó vonal sem kell:
+\renewcommand{\headrulewidth}{0pt}
+}
+
+%A TÖBBI OLDAL FEJ ÉS LÁBLÉCE:
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Reguláris kifejezések ekvivalenciája}
+\fancyfoot[R]{\thepage}
+
+
+%A címoldalra se fej- se lábléc nem kell:
+\thispagestyle{empty}
+
+\begin{center}
+\vspace*{1cm}
+{\Large\bf Szegedi Tudományegyetem}
+
+\vspace{0.5cm}
+
+{\Large\bf Informatikai Intézet}
+
+\vspace*{3.8cm}
+
+
+{\LARGE\bf Reguláris kifejezések ekvivalenciája}
+
+
+\vspace*{3.6cm}
+
+{\Large Szakdolgozat}
+% vagy {\Large Szakdolgozat}
+
+\vspace*{4cm}
+
+%Értelemszerűen megváltoztatandó:
+{\large
+\begin{tabular}{c@{\hspace{4cm}}c}
+\emph{Készítette:}     &\emph{Témavezető:}\\
+\bf{Hajagos Károly}  &\bf{Dr. Fülöp Zoltán}\\
+programtervező informatikus BSc    &egyetemi tanár\\
+szakos hallgató&
+\end{tabular}
+}
+
+\vspace*{2.3cm}
+
+{\Large
+Szeged
+\\
+\vspace{2mm}
+2017
+}
+\end{center}
+
+
+%A tartalomjegyzék:
+\tableofcontents
+
+\sloppy
+
+%A \chapter* parancs nem ad a fejezetnek sorszámot
+\chapter*{Feladatkiírás}
+%A tartalomjegyzékben mégis szerepeltetni kell, mint szakasz(section) szerepeljen:
+\addcontentsline{toc}{section}{Feladatkiírás}
+
+
+Két reguláris kifejezést ekvivalensnek mondunk, ha az általuk meghatározott nyelvek megegyeznek. Ismert tény, hogy nem adható meg véges sok olyan azonosság (véges axiómarendszer), amelyekből csupán az "egyenlőség szabály" alkalmazásával eldönthető, hogy két reguláris kifejezés ekvivalens-e. Ugyanakkor, A. Salomaa [2] cikkében megadott egy olyan, tizenhárom  axiómából és négy következtetési szabályból álló formális bizonyítási rendszert, amely helyes és teljes a reguláris kifejezések ekvivalenciájának bizonyítására vonatkozóan.
+A bizonyítási rendszer hallgatók számára is érthető, részletesen ismertetésre került az [1] kézikönyvben.
+A hallgató feladata megismerkedni a reguláris kifejezések azonosságaival és Salomaa formális rendszerével és algoritmusával, továbbá, a rendszer helyességének és teljességének megmutatása és a formális bizonyítás részleteinek kidolgozása.\newline
+
+[1] Dan A. Simovici, R. L. Tenney, Theory of Formal Languages with Applications, World Scientific, 1999.
+\newline
+
+[2] A. Salomaa, Two complete axiom systems for the algebra of regular events, J. ACM, 13 (1966) 158-169.
+
+\chapter*{Tartalmi összefoglaló}
+\addcontentsline{toc}{section}{Tartalmi összefoglaló}
+
+A tartalmi összefoglalónak tartalmaznia kell (rövid, legfeljebb egy oldalas, összefüggő megfogalmazásban)
+a következőket: a téma megnevezése, a megadott feladat megfogalmazása - a feladatkiíráshoz viszonyítva-,
+a megoldási mód, az alkalmazott eszközök, módszerek, az elért eredmények, kulcsszavak (4-6 darab).
+
+Az összefoglaló nyelvének meg kell egyeznie a dolgozat nyelvével. Ha a dolgozat idegen nyelven készül,
+magyar nyelvű tartalmi összefoglaló készítése is kötelező (külön lapon), melynek terjedelmét a TVSZ szabályozza.
+
+
+\chapter*{Bevezetés}
+\addcontentsline{toc}{section}{Bevezetés}
+
+Itt kezdődik a bevezetés, mely nem kap sorszámot.
+
+
+
+\chapter{Általános fogalmak és jelölések}
+
+Ebben a fejezetben azokról az eszközökről lesz szó, amelyek a későbbi definíciók, tételek és példafeladatok építőkövei. Bevezetjük az ábécéket és az azokból képezhető szavakat, nyelveket, továbbá definiálunk különféle függvényeket, melyek segítenek az egyes nyelvi algoritmusok leírásában.
+
+\section{Általános jelölések}
+
+Tetszőleges $H$ véges halmaz esetén $|H|$-val jelöljük a $H$ elemeinek a számát.
+
+
+\section{Ábécék és szavak}
+
+Szimbólumok egy  véges, nemüres halmazát ábécének nevezzük.  A továbbiakban az ábécét általában $\Sigma$-val jelöljük, elemeit pedig betűknek is hívjuk.
+Egy $a_1\ldots a_k$ alakú sorozatot, ahol $k\geq 0$ és $a_1,\ldots,a_k\in\Sigma$, a $\Sigma$ ábécé feletti szónak (sztringnek) nevezzünk. Abban az esetben ha $k = 0$, az üres szót kapjuk, melynek jele $\lambda$. Az ábécé tehát karakterek halmaza, melyekből szavakat alkothatunk, ezenfelül keretet szab a szóalkotáskor felhasználható karakterek számát illetően.
+
+\noindent Ha például $\Sigma=\{a,b\}$, akkor  $\lambda, a, b, aa, ab, bba, ababa,\ldots$ stb  $\Sigma$ ábécé feletti szavak. Látható, hogy akár egyelemű ábécé esetén is képezhető végtelen számú szó.
+
+A továbbiakban az $a,b,c...$ szimbólumokkal az ábécé betűit, az $...,u,v,w,x,y,z$ szimbólumokkal pedig az ábécé feletti szavakat jelöljük.
+
+Legyenek $u,v$ szavak $\Sigma$ felett. Ekkor az $uv$ szó az $u$ és $v$ konkatenációja, vagyis összeláncolása. A konkatenáció asszociatív, hiszen $(uv)w = u(vw)$, de nem kommutatív. Az $u$ $n$-edik hatványán az $u^n = u_1\cdots u_n$ szót értjük, ahol $u_1 = u_2 = \ldots = u_n = u$. Ha $n = 0$, akkor $u^n = \lambda$.
+
+\noindent Például, ha $u = abb$ és $v = bab$, akkor $uv = aabbab$ és $u^3 = uuu = abbabbabb$.
+
+Egy $w$ szó hosszán az őt alkotó betűk multiplicitással vett számát értjük, melyet így jelölünk: $|w|$. Formálisan: ha   $w = \lambda$, akkor $|w| = 0$, különben, ha $w = av$, akkor $|w| = 1 + |v|$.
+
+Az összes $\Sigma$ feletti szavak halmazát $\Sigma^*$-gal jelöljük, továbbá $\Sigma^+=\Sigma^*\setminus \{\lambda\}$. Tehát
+\begin{equation*}
+\Sigma^*=\{a_1\ldots a_k\mid k\geq 0,a_1,\ldots,a_k\in\Sigma\}\text{ és } \Sigma^+=\{a_1\ldots a_k\mid k\geq 1,a_1,\ldots,a_k\in\Sigma\}.
+\end{equation*}
+
+
+\noindent Legyen $\Sigma=\{a,b\}$, ekkor
+\begin{equation*}
+\begin{split}
+ &\Sigma^*=\{\lambda,a,b,aa,bb,ab,ba,aaa,bbb,aab...\},\\& \Sigma^+=\{a,b,aa,bb,ab,ba,aaa,bbb,aab...\}.
+\end{split}
+\end{equation*}
+
+A $w$ szóban található $a$ betűk számát $\n_a (w)$ jelöli. $w=abba$ esetén $\n_a (w)=2$.
+
+Egy $w$ szó prefixe minden olyan $u$ szó, amelyhez van olyan $v$, hogy $w=uv$. Továbbá $w$ szuffixe minden olyan $u$ szó, amelyhez van olyan $v$, hogy $w=vu$. A $w$ szó összes prefixének halmazát $\pre(w)$, az összes szuffixének halmazát $\suf(w)$ jelöli. Tehát
+\begin{equation*}
+\begin{split}
+ &\pre(w)=\{u\in\Sigma^*\mid \exists(v\in \Sigma^*): w=uv\},\\& 
+ \suf(w)=\{v\in\Sigma^*\mid \exists(u\in \Sigma^*): w=uv\}.
+\end{split}
+\end{equation*}
+
+
+\noindent Nyilvánvaló, hogy $|\pre(w)| = |\suf(w)|$.
+
+
+\noindent Legyen $u = abaa$, ekkor $\pre(u) =\{\lambda,a,ab,aba,abaa\}$, illetve $\suf(u) = \{abaa,baa,\\aa,a,\lambda\}$.
+
+\noindent Egy $w$ szó valódi prefixe minden olyan $u\in \pre(w)$ szó, amelyre $u\neq\lambda$ és $u\neq w$. A $w$ valódi szuffixeit hasonló módon definiáljuk.
+
+\section{Nyelvek}
+
+$\Sigma$ feletti nyelvnek nevezzük $\Sigma^*$ tetszőleges részhalmazát. Például, $\Sigma=\{a,b\}$ feletti $\{a,ba,aa\}$ nyelv véges, míg az ugyancsak $\Sigma$ feletti $\{a^n\mid n\geq 0\}$ és $\{a^nb^n\mid n\geq 0\}$ nyelvek végtelenek. A továbbiakban egy  nyelvet általában $L$-lel jelölünk.
+
+\noindent A $\Sigma$ feletti nyelvek halmaza tartalmazza az üres nyelvet ($\emptyset$), a teljes nyelvet ($\Sigma^*$) és az egység nyelvet, azaz $\{\lambda\}$-t. Egy $L$ nyelv $\lambda$-mentes, ha $\lambda\notin L$.  Ha  $L$ $\lambda$-mentes, akkor $L\subseteq\Sigma^+$.
+
+\noindent Legyen $\Sigma=\{a,b\}$ és legyen $L$ azon három hosszúságú szavak halmaza, melyeknek középső betűje különbözik a többi betűtől. Ekkor $L=\{aba,bab\}\subseteq\Sigma^+$, ezért az is igaz, hogy $L=\{aba, bab\}\subseteq\Sigma^*$.
+
+\noindent Az összes $\Sigma$ feletti nyelvek halmaza ${\cal P}(\Sigma^{*})$, vagyis $\Sigma^*$ összes részhalmazainak halmaza. 
+
+Legyen $L_1,L_2\subseteq\Sigma^*$, ekkor a halmazelméleti műveletek: $L_1\cup L_2$, $L_1\cap L_2$, $L_1\setminus L_2$ és az $L_1$ komplementere: $\overline{L_1} = \Sigma^* \setminus L_1$. Továbbá, $L_1$ és $L_2$  konkatenációja, $L_1$ iterációja és $L_1$ $\lambda$-mentes iterációja sorrendben: 
+\begin{equation*}
+\begin{split}
+ &L_1L_2=\{uv\mid u\in L_1, v\in L_2\},\\& 
+ L_{1}^{*} = \{\lambda\}\cup L_1\cup L_1L_1\cup L_1L_1L_1\cup\ldots\\&
+ L_1^+ = L_1\cup L_1L_1\cup L_1L_1L_1\cup\ldots
+\end{split}
+\end{equation*}
+
+\noindent Legyen $\Sigma=\{a,b\}$, $L_1=\{ab,bb,bab\}\subseteq\Sigma^*$ és $L_2 = \{bb,aab,bab\}\subseteq\Sigma^*$. Ekkor 
+\begin{itemize}
+\item $L_1\cup L_2 = \{ab,bb,bab,aab\}$;
+\item $L_1\cap L_2 = \{bb,bab\}$;
+\item $\overline L_1 = \{\lambda,a,b,aa,ba,aaa,aba,baa,aab,abb,bbb,bba,\ldots\}$;
+\item $L_1L_2 = \{abbb,abaab,abbab,bbbb,bbaab,bbbab,babbb,babaab, babbab\}$
+\item $L_1^3 = L_1L_1L_1 = \{ababab,ababbb,ababbab,stb...\}$, továbbá $L_1^0 = \{\lambda\}$;
+\item $L_1^* = \{\lambda,ab,bb,bab,abab,abbb,abbab,bbab,bbbb,bbbab,babab,\ldots\}$;
+\item $L_1^+ = \{ab,bb,bab,abab,abbb,abbab,bbab,bbbb,bbbab,babab,\ldots\}$.
+\end{itemize}
+
+\noindent Az eddigiekből következik, hogy minden L nyelvre $\lambda\in L^*$, és $L^* = \{\lambda\}\cup L^+$, illetve $\emptyset^* = \{\lambda\}$. Az $\cup$, $\cap$ és a komplementer műveleteket Boole műveleteknek, míg az $\cup$, konkatenáció és iteráció műveleteket reguláris műveleteknek nevezzük.
+
+Legyen $L,K$ két nyelv $\Sigma$ ábécé felett. Ekkor a jobb és bal hányados sorrendben a következő:
+\begin{equation*}
+\begin{split}
+&LK^{-1}=\{u\in\Sigma^*\mid uv\in L \text{ és } v\in K\}\\&
+K^{-1}L=\{u\in\Sigma^*\mid vu\in L \text{ és } v\in K\}
+\end{split}
+\end{equation*}
+
+\noindent Legyen $a,b,c\in\Sigma$, továbbá $L=\{\lambda,a,ba,bca\}$, $K_1=\{a,b\}$ és $K_2=\{b,a\}^*$ pedig $\Sigma$ feletti nyelvek. Ekkor
+\begin{equation*}
+\begin{split}
+&LK^{-1}_1=\{\lambda,b,bc\}\\&
+LK^{-1}_2=\{\lambda,a,b,bca\}\\&
+K^{-1}_1 L=\{\lambda,a,ca\}
+\end{split}
+\end{equation*}
+
+\begin{lemma}\label{egyenlet-lemma}
+Legyenek $L_1$ és $L_2$ tetszőleges nyelvek $\Sigma$ felett. Ha $\lambda\notin L_2$, akkor az $X=L_1\cup L_2X$ egyenletnek az $L_2^*L_1$ nyelv az egyetlen megoldása.
+\end{lemma}
+
+\begin{proof} Vezessük be az $L=L_2^*L_1$ rövidítést. Könnyű ellenőrizni, hogy $L=L_1\cup L_2L$, tehát $L$ megoldása az egyenletnek.
+Tegyük fel, hogy egy másik $L'\neq L$ nyelv is megoldása ugyanannak az egyenletnek, tehát $L'=L_1\cup L_2L'$ is teljesül. Ekkor az $L\setminus L'$ és az $L'\setminus L$ halmazokból legalább az egyik nemüres. Feltesszük, hogy $L'\setminus L\neq \emptyset$, és azt, hogy $w$ a minimális hosszúságú szó az $L'\setminus L$ halmazban. Világos, hogy $w\notin L_1$, mert különben a $w\in L$ tartalmazás is teljesülne. Ugyanakkor $L'=L_1\cup L_2L'$, tehát $w\in L_2L'$. Ezért $w=uv$, ahol $u\in L_2$ és $v\in L'$. Mivel $\lambda\notin L_2$, $u\neq\lambda$, tehát $|v|<|w|$. Az is világos, hogy $v\notin L$, hiszen ekkor igaz lenne, hogy $w=uv\in L_2L\subseteq L$. Tehát $v\in L'\setminus L$, ez azonban ellentmond annak, hogy $w$ a minimális hosszúságú szó az $L'\setminus L$ halmazban. Az $L\setminus L'\neq\emptyset$ eset ezzel szimmetrikusan bizonyítható.
+\end{proof}
+
+\section{Helyettesítések és morfizmusok}
+
+\chapter{Formális következtetési rendszer \rk{ekre}}
+
+Ebben a fejezetben megadunk egy formális következtetési rendszert, amely egy deduktív megközelítést ad \rk{ek} ekvivalenciájára vonatkozóan.   A rendszer tizenhárom axiómából és négy következtetési szabályból áll. A rendszerrel $R_1\sim R_2$ alakú elemeket következtethetünk (vagy: bizonyíthatunk be), ahol $R_1$ és $R_2$ \rk{ek}. Bebizonyítjuk, hogy a rendszer helyes és teljes a \rk{ek} ekvivalenciájára nézve:
+bármely két $R_1$ és $R_2$ reguláris kifejezésre teljesül, hogy $R_1\sim R_2$ akkor és csak akkor bizonyítható, ha $R_1\equiv R_2$.
+A rendszert  Arto Salomaa prezentálta az 1966-ban megjelent \cite{Sal66} cikkében.
+
+\begin{defi}
+Legyenek $R_1,R_2$ \rk{ek}. Ha $R'_1$ és $R'_2$ helyettesítő példányai az $R_1$ és $R_2$ kifejezéseknek, akkor az $R_1\sim R_2$ helyettesítő példánya: $R'_1 \sim R'_2$.
+\end{defi}
+
+
+A helyettesítés két ábécé esetén egy leképezés (más szóval függvény), melynek során az első ábécé minden elemének egy, a másik ábécé feletti nyelvet feleltetünk meg. Tehát a helyettesítés egy  $s:\Sigma\to {\cal P}(\Theta^*)$ leképezés, ahol $\Sigma$ és $\Theta$ tetszőleges ábécék.
+
+
+\begin{thebibliography}{10}
+\bibitem{SymTen99} Dan A. Simovici, R. L. Tenney, Theory of Formal Languages with Applications,
+World Scientific, 1999.
+
+\bibitem{Sal66} A. Salomaa, Two complete axiom systems for the algebra of regular events,
+J. ACM, 13 (1966) 158-169.
+
+
+\end{thebibliography}
+
+\end{document}

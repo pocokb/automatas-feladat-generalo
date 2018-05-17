@@ -1,0 +1,260 @@
+A típusos generálás folyamata
+A cél az, hogy feladat szövegeket, és azok megoldását generáljuk le egyszerre, ehhez egy többlépcsõs generáló folyamatot használunk:
+1.	Véletlen generálunk egy fát, amely teljes egészében leírja a feladatot.
+Ezt a lentebb felírt szabályokkal, mint generatív nyelvtannal megadott CF nyelv véletlenszerû kifejtésével tesszük.
+2.	A generált fát lefordítjuk véges automatára, tehát csúcspontonként bejárva a fát, alulról felfelé fölépítjük azt a véges automatát, amely a feladat megoldása. Ezzel tudjuk majd ellenõrizni, hogy a feladatra beérkezett megoldás jó-e.
+3.	A generált fát lefordítjuk magyar nyelvû feladatszövegre. Ezt a szöveget adjuk a diákoknak.
+Ez a többlépcsõs folyamat megbonyolítja a generálást azonban igen nagy elõnyökkel is jár, mert ha kifejtés közben generálnánk a szövegeket és automatákat, akkor õk nem látnák a (még meg nem épült) fát maguk körül.
+Olyan ez, mint amikor mielõtt megszólalunk, átgondoljuk, hogy mirõl is szeretnénk beszélni, és csak akkor kezdünk el beszélni, amikor ez már megvan. Tehát fölépítjük a szemantikát teljesen mielõtt a mondatot elkezdenénk felépíteni, így nem akadunk meg.
+Ennek nagy elõnye például a magyar mondat generálásánál, hogy a második lépcsõfokon hozzá tudunk adni környezetfüggõ viselkedés az eredetileg környezetfüggetlen nyelvtannal generált szerkezethez. Így a toldalékokat is sokkal könnyebb kezelni. Továbbá az is lényeges elõny, hogy a generált fának semmivel nem kell bonyolultabbnak lennie, mint ami már egyértelmûen definiálja az etalonnak szánt véges automatát és a magyar nyelvû feladatleírást.
+Ennek következtén a véletlengenerálás tulajdonságai is a fa generálásánál dõlnek el.
+A típusos generálás fõbb tulajdonságai
+Helyesség: 
+A típusos generálás mindig helyes, mert a fa szerkezet feldolgozása során garantálni tudjuk ezt.
+Jelen esetben is az, mert a konstrukciók folyamán rekurzívan garantáljuk, hogy minden amit generálunk, véges automata. Továbbá a magyar nyelvû feladatleírásnál is garantáljuk a mondatok nyelvtani helyességét a szabályokkal.
+Teljesség: 
+A típusos generálás általában nem teljes, ennek oka, hogy csak azokat a véges kombinációkat tudja, amiket megadtunk neki a fát felépítõ szabályoknál. Ez azért nem baj, mert mint ahogy fentebb említettem nem szokott probléma lenni, hogy a véges generálás nem tud mindent generálni, ha tud elegendõen sok variációt generálni.
+Jelen esetben azonban lehet teljes is a véges automatákat tekintve, hiszen tudjuk, hogy a véges automaták osztálya megegyezik a reguláris nyelvekével, márpedig bármely reguláris nyelvet felírhatunk az abc-beli betûkbõl az üres nyelvbõl, és az üres string alkotta nyelvbõl kiindulva konkatenációval, unióval és Kleene star-al. Az általam felírt generálási szabályok nem teljesek, mert korlátozva van a generálás szélessége és mélysége a feladatok érthetõsége miatt, de ennek a föntebb leírt okokból nincs igazán jelentõsége.
+Egyediség
+A típusos generálás általában nem egyedi és nehéz azzá tenni, viszont lényeges elõnyökkel jár ha legalább nagyjából sikerül egyedivé tenni. Hiszen ekkor kevesebb valószínûséggel generál például feladatokat amik ugyanazok csak máshogy megfogalmazva (szinonimák).
+Jelen esetben sem egyedi a generálás, de ezzel nincs különösebb probléma.
+
+ 
+Foldok
+Általánosítás
+Amikor hétköznapi értelemben számokról beszélünk, akkor olyasmik jutnak eszünkbe, hogy 5, vagy 0.34, esetleg Pi. Ha viszont például van egy olyan mondatunk, hogy 
+1: „Gondoltam egy szóra, melyben az ’a’ betûk száma 3.”
+, akkor  érezhetõ, hogy a következõ mondat:
+2: „Gondoltam egy szóra, melyben az ’a’ betûk száma 5.”
+nagyon hasonló hozzá. Hasonló a mondat alakja(szintaktika), és jelentése is(szemantika).
+De nézzük a következõ két szót:
+„mivel” és  „mível”, ezen szavaknak az alakjuk hasonló, ám teljesen mást jelentenek.
+Persze mondhatjuk, hogy a világon lehet egy olyan nyelv, amelyben ez a két szó jelentése is hasonló és ez a téma nagyon összetett, mivel az élõ nyelv folyamatosan változik, a szavak jelentése, azok szemantikája, vagy akár szintaktikája változhat egy adott nyelven belül is.
+Ezért fontos bevezetni a szemantikai leíró fogalmát:
+A szemantikai leírás egy algoritmust ír le, amely felismeri, hogy az inputja eleme-e egy meghatározott halmaznak. Ezt a leírót a megfelelõ gépbe beadva a gép eldönti, hogy eleme-e az input a halmaznak. 
+(Fontos megjegyezni, hogy a megfelelõ szemantikai leíró átalakításával egy olyan leírót kapunk, amely alkalmas kigenerálni az adott halmaz elemeit. Ez a Turing gépek és általános nyelvek ekvivalenciáját kimondó tétel következménye.)
+Továbbá bevezetjük az értelmezés fogalmát:
+Az értelmezés egy algoritmus ami egy mondatról egy szemantikai leíróra fordít.
+Tehát egy adott értelmezésben az 1-es mondatot lefordítva kaphatjuk a következõ szemantikai leírót:
+INPUT: word
+int count = 0;
+for(char c: word){
+	if(c == ’a’) count++;
+}
+if(count == 3) ACCEPT;
+else REJECT;
+
+
+
+
+A 2-es mondathoz tartozó leíró pedig:
+INPUT: word
+int count = 0;
+for(char c: word){
+	if(c == ’a’) count++;
+}
+if(count == 5) ACCEPT;
+else REJECT;
+
+Pongyolán azt mondhatjuk, hogy két mondat jelentése hasonló, ha az adott értelmezés mellett a szemantikai leíróik részben hasonlítanak.
+Ennél pontosabban megfogalmazva, ha két mondat jelentése hasonló, akkor létezik olyan leíró, amely megfelelõen paraméterezve ekvivalens mindkét -az adott értelmezésben lefordított- leíróval. 
+Vagy talán még szebben úgy is mondhatjuk, hogy a paraméternek, mint szabad változónak létezik olyan megkötése, amely az 1-es leíróval megegyezõ mûködést okoz, és létezik olyan megkötése is, amely a 2-es leíróval megegyezõ mûködést okoz.
+Itt például:
+INPUT: word, N
+int count = 0;
+for(char c: word){
+	if(c == ’a’) count++;
+}
+if(count == N) ACCEPT;
+else REJECT;
+Ilyenkor ezt a leírót a két mondat általánosított szemantikai leírójának nevezzük.
+ 
+Indirekció
+A következõ mondat:
+3: „Gondoltam egy szóra, melyben az ’a’ betûk száma kisebb, mint 3.”
+szintén nagyon hasonlít az utóbbi 1-es mondatra:
+1: „Gondoltam egy szóra, melyben az ’a’ betûk száma 3.”
+Õk is azért hasonlítanak, mert van közös általánosított leírójuk:
+INPUT: word, numberPredicate()
+int count = 0;
+for(char c: word){
+	if(c == ’a’) count++;
+}
+if(numberPredicate(count) == true) ACCEPT;
+else REJECT;
+Ahol a numberPredicate(A) az A számnak egy tulajdonságát ellenõrzi.
+Az 1-es esetén ez a tulajdonság: A == 3, míg a 3-asnál A < 3.
+Azt, hogy az értelmezés során indirekció történik, a szintaktikában is meg szokták jelölni, pl. így:
+3b: „Gondoltam egy szóra, melyben az ’a’ betûk száma A, ahol A kisebb, mint 3.”
+Az indirekciók alapvetõ részét képezik bármely kellõen hasznos nyelvnek.
+Mivel a fentebbi leírók C nyelven iródtak és az õket futtató gép egy számítógép(C fordító->bináris->processzor utasítások), úgy tûnhet, hogy az indirekciókat megvalósító leírók megvalósítása egy triviális dolog. Ez nincs mindig így. Nézzük a következõ példát:
+4: „Gondoltam egy szóra, melyben az ’a’ betûk száma kisebb, mint A, ahol A kisebb, mint 3.”
+Ez egy valid indirekció, de a mondatot még értelmezni is nehéz.
+Ha explicitté tesszük az egész kifejezést ez jön ki:
+4b: „Gondoltam egy szóra, melyben az ’a’ betûk száma B, ahol B kisebb, mint A és A kisebb, mint 3.”
+Tehát 0 <= B < A és A < 3, ahol A és B szabad változók, vagyis bármilyen értéket felvehetnek.
+A következõ kombinációk lehetségesek (A,B) párokkal felírva:
+(1,0),(2,0),(2,1), tehát a B(vagyis az ’a’ betûk száma) a {0,1} halmazból kerülhet ki.
+Ezt C kódban sem könnyû kezelni. Ugyanis, ha ezt az indirekciót implicitté tesszük a mondatban ezt kapjuk:
+4c:”Gondoltam egy szóra, melyre van olyan szám, ami az ’a’ betûk számánál nagyobb, de 3-nál kisebb.”
+Ez pedig egy elsõrendû logikai kifejezés.
+C kódban az ilyeneket kezelhetjük úgy, hogy kötött B-re és szabad A-ra rezolúcióval megoldjuk a kielégíthetõséget. Vagy akár ezt a folyamatot be is építhetjük magába a kódba. A prolog is hasonlókat csinál, de ebbe most nem megyek bele, mert csupán érinti a témát. 
+Foldok
+Az általánosítások és indirekciók kezelése automatáknál sokkal nehezebb, mert az ilyen paramétereket nem tudjuk csak úgy átadni az automatának, hiszen annak egyetlen paramétere a szó amit felismer vagy nem.
+Ezeket a paramétereket bele kell építeni az automatába a konstrukció közben, ezt nevezem itt foldnak.
+Elsõ példa:
+Például ha egy olyan automatát szeretnénk építeni, amely felismeri, hogy szerepel a szóban részszóként ’aba’, akkor ezt az ’aba’-t nem tudjuk csak úgy átadni az automatának. A konstrukció folyamán beépítjük. Ennek legegyszerûbb módja ha egy epsilon átmenetes automatába  csinálunk 4 állapotot, és 3 átmenetet köztük sorban ’a’, ’b’,’a’ betûkre. Majd rakunk az elejére és a végére is Sigma csillagot, majd epsilon mentesítünk és determinizálunk.
+Másik példa:
+Automata, amely ’ab’-t tartalmaz N-szer, ahol N-re igaz valamiféle predikátum(pl páros, =3, >2, stb). Ezt a predikátumot szintén automatával adjuk meg, ahol a szám növekedésére egy ’e’ betûs, nem növekedésére pedig egy ’z’ betûs állapotátmenetet teszünk. Ezután kreálunk egy automatát, amely akkor fogad el, ha a szó ’ab’-re végzõdik. Majd a két automatát párhuzamosan futtatva hatványhalmaz konstrukciót csinálunk, ahol az N-es automata az ’e’-s átmenetén akkor lép, ha az ’ab’-re végzõdõs automata végállapotba ér, különben a ’z’-s állapotra lép.
+Ez logikus is, hiszen ha egy szó ’ab’-t N-szer tartalmaz, az azt jelenti, hogy a szó beolvasása során az ’ab’ N-szer lesz az addig beolvasott szó végén.
+Harmadik példa:
+Automata, amelynek minden N egymás utáni betûjére igaz valami predikátum. A predikátumot szintén automatával adjuk meg. Itt elõször csinálunk minden lehetséges N egymás utáni betûre egy állapotot, majd ezeken az N elemû szavakon futtatjuk a predikátumot, mint automatát. Ha elfogadta, akkor célállapot lesz, ha nem akkor nem. Továbbá minden N-nél rövidebb szó automatikusan célállapot, hiszen arra nem vonatkozott a megkötés.
+A példákból látható, hogy ez egy nagyon fontos része a generálási folyamatnak. Ezért definiálom a fold fogalmát pontosabban is:
+Adott egy probléma, amelyben van legalább egy szabad változó. Adott egy, a szabad változókat megkötõ állítás. Foldnak nevezzük azt az algoritmust, ami elõállít egy algoritmust, ami megoldja a problémát a változók kötése mellett.
+Például:
+Probléma: W input szó tartalmazza-e S szót.	(S itt egy szabad változó, bármi lehet)
+Kötõ állítás: S = ’aba’, vagy S a-ra végzõdik.
+Fold: (Probléma, kötõ állítás) -> Algoritmus (itt véges automata)
+Algoritmus: Eldönti, hogy W-nek része-e ’aba’, vagy a másik példában, hogy W-nek része-e olyan szó ami a-ra végzõdik.
+Az algoritmusokat a generálás során következetesen véges automatákkal adtam meg, ezzel garantálom, hogy akárhány fold után is olyan nyelv keletkezzen, amely felismerhetõ véges automatával.
+Végezetül egy lista a foldokról (aszerint, hogy mi a kötés) nehézsége szint szerint:
+Fix szó
+Véges szó halmaz
+Predikátum(=algoritmussal megadott szó, valószínûleg végtelen halmazból)
+Predikátumokból álló logikai kifejezés szabad változó nélkül(=Ítéletlogikai kifejezés)
+Logikai kifejezés másik kötött változóra történõ hivatkozással(=Elsõ és magasabb rendû kifejezés)
+ 
+Nyelvi problémák a típusos generálás körül
+A típusos generálás során egy kontextusfüggetlen (cf) nyelv segítségével generálunk szavakat a formális nyelvek órán megismert kifejtõ módszerrel. Ez így egyszerû, hiszen egy faszerkezetben kifejthetõk a szemantikus elemek, viszont ez korlátokat is jelent. Ezen korlátok van, hogy (1) elméleti jellegûek, tehát egy bizonyos feladat fajtát nem tudunk megvalósítani. És van, hogy (2) gyakorlati jellegûek, tehát ugyan a feladatot meg tudjuk valósítani, de nehézkes, problémás. 
+Általánosan a kontextus független nyelvek korlátja az, hogy nem lehet bennük egy adott elem kifejtésétõl függõen kifejteni egy másikat.
+Mivel a feladatok általánosan a
+ <valamirõl> <állítok valamit> 
+sémára épülnek ezért egy cf nyelvvel csak úgy tudjuk generálni ha lefixálunk egy típust, például, <valamilyen mérték, ami egy egész szám és jelöljük n-el>  <n páros>
+Elméletileg sem lehetséges
+A következõt például cf nyelvvel (legalábbis általánosan) nem lehet megcsinálni:
+ba^ncb^ma : n - m >  5, n páros
+<mirõl állítunk> : <mit> sémában itt baloldalon definiáljuk, hogy mi is ez az n és m, és ezekre jobboldalán szeretnénk valami állítást megfogalmazni, tehát balról jobbra kell, hogy menjen az az információ, hogy van egy n és egy m egész szám. Ez így, ebben a konkrét esetben mûködhet, hiszen csinálunk egy típust, ahol fixen n és m változókról állítunk dolgokat, de ez általánosan nem megy:
+ba^ncb^mac^k : n-m > 5, n páros, n + k páratlan
+Ezt már az elõzõ sémával nem tudjuk megcsinálni, mert nem megy át a k. Általánosan is az a probléma, hogy a <mirõl állítunk> blokkban keletkeznek a változók amikrõl állítani szeretnénk valamit és végtelen sok is keletkezhet, erre pedig véges sok típussal nem fogunk tudni felkészülni.
+Lehetséges, de gyakorlatban nehézkes
+Sokat elmond a cf nyelvek korlátozottságáról, hogy ha terminális abc elemeitõl szeretnénk függõvé tenni valamilyen kifejtést, azt nagyon nehezen tehetjük meg. A következõ példa ezt jól szemlélteti:
+|W|a - |W|b + |W|c páros
+Itt arról van szó, hogy van egy aritmetikai kifejezésünk, amely bizonyos abc-beli betûkbõl alkotott aritmetikai kifejezés eredményérõl állít valamit (itt például azt, hogy páros). Cf nyelvben ezt meg lehet csinálni, de minden alkalommal, amikor az abc-nk változik, az összes segédterminálisunkat újra kell írni.
+Ezen úgy tudtam segíteni, hogy egy for ciklussal az abc specifikus szabályokat dinamikusan betöltöm a generatív nyelvtanba generálás elõtt.
+ 
+A magyar nyelvû feladatszöveg generálása
+Amikor a generált fából a mondatokat összerakjuk, az a legnagyobb nehézség, hogy a mondatok értelmesek legyenek, és ne úgy nézzen ki, mint amit google fordítóból szedtek ki.
+Itt sok apró probléma van, amelyeket egyesével felsorolok:
+Toldalékok
+Ahhoz, hogy értelmes mondatok keletkezzenek, fontos, hogy használjunk toldalékokat, és a megfelelõ alakban használjuk azokat.
+„A kutya ül a fû.”, vagy „4-al osztható” jellegû kifejezések erõsen kétségbe vonnák a feladatok komolyságát.
+A megfelelõ toldalék választásával nem szokott sok gond lenni. A hangalak egy kicsit problémásabb. Általában a szavak, szótagok magas, mély és vegyes hangrendûségétõl függ a toldalékok hasonulása.
+Magas hangrendû magánhangzók: e,é,i,í,ö,õ,ü,û
+Mély hangrendû magánhangzók:  a,á,o,ó,u,ú
+Egy szó magas hangrendû, ha benne csak magas hangrendû magánhangzók vannak, például: „kilenc”, ilyenkor a toldaléka is magas: „kilenccel”
+Egy szó mély hangrendû, ha benne csak mély hangrendû magánhangzók vannak, például: „kalóz”, ilyenkor a toldaléka is mély: „kalózzal”
+Egy szó vegyes hangrendû, ha benne magas és mély hangrendû magánhangzók is vannak, például: „Dóri”, ilyenkor a toldaléka mély: „Dórival”
+Ennél bonyolultabb esetek is vannak a toldalékok hangalakjára, de egyszerûbb esetekben ez mûködik.
+Nekünk viszont nincs szükségünk ilyen bonyolult logikai összefüggések kódolására, hiszen amikre toldalékok kerülnek azok vagy számok (amelyeknek utolsó tizedesjegye 0-9 lehet, tehát véges sok), illetve szavak, melyeknek az utolsó betûjéhez hasonul a toldalék, és ezekbõl is véges sok van, ezért elegendõ egy switch case-el minden lehetõségre kézzel beégetni a toldalékokat.
+Negálás
+Magyar nyelvben a negálás nem egyszerûen az, hogy elé rakunk egy „nem”-et az állításnak, hiszen akkor olyan kifejezések keletkeznének, hogy „nem büszke vagyok”.
+Például:
+„W ab-vel kezdõdik” -> „W nem kezdõdik ab-vel” (tehát a szórend itt változik)
+„W-ben az a-k száma osztható 5-el” -> „W-ben az a-k száma nem osztható 5-el” (a szórend itt nem változik, elég kirakni a „nem”-et)
+„Bármely a betû után áll egy b betû” -> „Van olyan a betû, amely után nem áll b betû” (ez egy elsõrendû kifejezés, ezt még nehezebb értelmesen negálni)
+Ezeket az esetek CF nyelvvel kezelni elég nehéz, de nem lehetetlen, hiszen minden mondatnak kétféle alakja van, a negált és a negálatlan, tehát véges sok variáció van, ezért generálható cf nyelvvel, csak nem célszerû. Erre a célra a kódban az értelmezés során egy „ál”-kontextfüggõ mûködést raktam be, amely minden negálásnál lefele tol egy jelzést, hogy minden állítás maga tudja eldönteni, hogyan viselkedjen negálás esetén.
+Logikai kifejezések
+Amíg egy elsõrendû logikai kifejezésnél természetes a rengeteg egybeágyazott és, nem, vagy, kvantor stb. , addig magyar nyelvben ezeket nem lehet csak úgy zárójelezéssel végtelenül halmozni.
+Ha pl. azt akarjuk negálni, hogy „fehér a hó és kék az ég”, akkor azt úgy szokás, hogy „nem igaz az állítás, hogy fehér a hó, és kék az ég”, tehát itt egy indirekciót kell explicit jelölnünk az állításra. Ezt a technikát tetszõleges logikai kapcsolatokra használhatjuk:
+„Van egy állításom, hogy piros a hó és zöld az ég, és van egy másik állításom, hogy kék az aszfalt vagy fehér a hold. Ha ezek közül valamelyik igaz, akkor te nyertél.”
+Ez azonban kicsit körülményes és nehezen értelmezhetõ tud lenni.
+De vannak kivételek, például ha kizárólag „vagy”, illetve „és” kapcsolatokat halmozunk:
+„Dél volt és meleg és tûzött nap és nem volt árnyék, de mégis dolgoztunk tovább.”
+A generálás során a programban inkább az ilyen kivételes fajtákból generálok, mert ezeknek természetesebb a hangzása.
+Idõrendben fordított toldalékolás
+Ezt különvettem, mert itt az történik, hogy az a szó még nem hangzott el, ami a toldalékot meghatározza, de a toldalék már ott van egy másik, õt megelõzõ szón. Például:
+„Szó, ami a-val kezdõdik.” de:
+„Szó, amiben legalább kettõ b betû van.”, itt a „benne van” ige már az elõtt toldalékot tesz az ami-re, hogy fölolvasásra kerülne.
+ 
+A feladatmegoldás modellezése
+Ebben és a következõ fejezetben pár gondolatot írok, amelyeket a feladatok nehézségének beállításához használtam volna, de az idõkorlát miatt nem ezeknek az implementálására nem került sor. Itt egy egyszerû modellt mutatok be a problémára.
+A feladatmegoldás folyamatát 5 fázisra bontottam:
+Ebben a sorrendben: értelmezés, modellezés, redukció, konstrukció, implementáció
+Részletesebben:
+Értelmezés
+Ebben a részben a feladatot a hallgató meg kell, hogy értse. Ehhez hozzá tartozik, hogy például egy automatás feladatnál már tud példákat mondani, hogy milyen szavakat fog elfogadni, és miket nem. Ez triviálisnak hangzik, de egy hosszabb szöveges feladatnál ez sok idõbe telhet és könnyû hibázni is.
+Modellezés
+Ebben a részben az értelmezett feladatot olyan alakra kell bontania, olyan fogalmakkal kell párhuzamba hoznia a hallgatónak, amelyekkel kapcsolatosan már ismer matematikai fogalmakat, és amelyek absztrakt módon fogják meg a feladat lényegét. Ilyen például egy való életbeli optimalizálós feladat felírása például egy egyenletrendszerrel, vagy logikai formulákkal, esetleg egy gráffal, stb. Automatás feladatoknál ennek kevesebb a jelentõsége, késõbb látni fogunk olyan típust ahol gráftulajdonságokat kell ellenõrizni automatával, ott a gráftulajdonságok szótulajdonságokra való átalakítása például modellezés.
+Redukció
+Ebben a részben a már megértett és kezelhetõ fogalmakra hozott feladatot olyan alakra kell átalakítani, amit a hallgató meg is tud oldani. Már a modellezés menete is személyfüggõ lehetett, de ez a fázis már végképp az, hiszen egy problémát többféleképpen meg lehet oldani. A legjobb az, ha minél egyszerûbb módot talál a hallgató. Automatánál redukció az például, hogy felismerjük, hogy az a szó, ami „a-val kezdõdik és ba-val kezdõdik” nem létezhet és ezzel a feladat nagyjából meg is van oldva. Továbbá redukció az is, amikor olyan ekvivalens alakra hozzuk a feladatot, amit könnyen meg tudunk oldani.
+Konstrukció
+Ebben a részben a már kellõen redukált és jól megfogalmazott feladatra találnunk kell egy módszert(algoritmust), ami megoldja azt. Konstrukció például két automata metszete. De ez nem ilyen egyszerû, mert a hallgató valószínûleg kevés konstrukciót ismer, illetve amit ismer azt sem biztos hogy jól. Ezért itt eszébe kell, hogy jusson a konstrukció menete, vagy ha nem ismeri, akkor ki kell találnia a konstrukció menetét, ami nehéz és idõigényes. Ezt a részt a redukciótól nehéz elválasztani, hiszen a hallgató pont olyan alakra próbálja redukálni a feladatot, amire van általa jól ismert konstrukció, de ez nem mindig sikerül.
+Implementáció
+Itt a már ismert/kitalált konstrukció elvégzése a feladat, itt áll elõ a megoldás. Ez könnyûnek tûnhet, de ha nagy a feladat, akkor könnyû elszámolni, hibázni. Itt a pontosság, következetesség a fontos.
+
+
+Részfeladat megoldásának lehetséges útjai
+A föntebbi modellbõl látható, hogy a feladatmegoldás útja általában koránt sem egyenes, ezért az idõigénye instabil lehet, hiba esetén sokszor újra kell kezdeni egy részt ami sok idõt ad a feladat megoldásának idejéhez. Ennek modellezésére pár lehetséges út a részfeladat megoldásához:
+Intuíció
+A hallgató pontosan tudja, hogyan kell megoldani az adott feladatot, valószínûleg azért, mert már rengeteget gyakorolta azt a részt.
+Ennek idõigénye minimális és stabil. A hiba esélye minimális.
+Keresés
+A hallgató ismeri a részfeladat megoldásának menetét, de nem emlékszik pontosan, ki kell próbálnia pár variációt mire rájön melyik is volt a jó.
+Ennek idõigénye közepes, és relatíve stabil. A hiba esélye csekély, mert ha rosszul kezdi el, érezni fogja, hogy ez nem az, mint ahogy korábban, például az órán megoldotta.
+Levezetés
+A hallgató nem ismeri a részfeladat megoldásának menetét, sosem csinált ilyet, de birtokában van olyan ismereteknek, amelyekbõl a megoldás helyes menete levezethetõ.
+Ennek idõigénye már magas, és igen instabil, a hiba esélye nagy. Nagyban függ attól, hogy a hallgató például kipihent-e, és mekkora gyakorlata van az adott területen. Ha rossz irányba indul el az lehetetlenné is teheti az idõben történõ megoldást.
+Találgatás
+Ha levezetni sem tudja a megoldást, akkor nincs más, mint hogy találgat. Kellõen összetett feladatnál ez szinte lehetetlen is lehet.
+Az idõigénye a legmagasabb, leginstabilabb és szinte biztos a hiba.
+De fontos megemlíteni, hogy a találgatás nehézségét nagyban meghatározza az, hogy mekkora a keresési tér. Ha a keresési tér kicsi, akkor a találgatás is idõben stabil.
+Itt nagyon lényeges az is, hogy milyen visszacsatolása van a hallgatónak a találgatás során. Belsõ visszacsatolás esetén a hallgató látja azt, hogy a megoldása nem jó, mert például a példa inputokból nem a megfelelõ példa outputot csinálja. Külsõ visszacsatolás esetén többször is beküldheti a feladatot és láthatja, hogy az jó-e.
+Hosszabb távon ha a keresési tér kicsi, és van visszacsatolás, akkor a hallgató látja, hogy melyik feladatra mi a jó megoldás és már ebbõl is képes következtetéseket levonni, amelyek birtokában egy késõbbi feladatot már lehet, hogy le is tud vezetni.
+A feladatmegoldás céljai
+A fentebbi modellek látván felmerül a kérdés, milyen feladatot kapjon a hallgató, mi a célja a feladatnak, miben fejleszti a hallgatót, mit kér pontosan számon.
+Egy kiegyensúlyozott feladatban lehetséges, hogy mind az 5 fázis nehéz, de attól függõen, hogy mi a cél, az egyes fázisokat lehet nehezebbé, könnyebbé tenni:
+A lehetõségek fázisokra bontva:
+Értelmezés
+Ha a szövegértést szeretnénk hangsúlyozni, akkor fontos, hogy a feladat kellõen összetett módon, hosszan legyen megfogalmazva, ám a feladat lényegében ne legyen annyira összetett. Tehát valamilyen egyszerû dolgot kell minél bonyolultabban tálalni.
+Az értelmezés során az intuíción van a hangsúly, mert ha hallgató nem érti a feladatot, és nem kap hozzá megfelelõ magyarázatot és példákat, akkor a keresés, levezetés, találgatás értetlen, nem fogja tudni megoldani. Az idõigény ezért stabil, vagy tudja és akkor kevés, vagy nem és akkor végtelen.
+Modellezés
+A modellezést nem könnyû nehezebbé tenni, mert a keresési tér nagysága miatt itt nem nagyon lehet levezetni, találgatni. Ha az órán gyakorolt modelleket nem ismeri, nem valószínû, hogy megtalálja a megfelelõt. Az idõigény itt is stabil, vagy tudja és kevés, vagy nem és akkor végtelen.
+Redukció
+A redukciót az értelmezéshez hasonlóan úgy lehet nehézzé tenni, ha a matematikai fogalmakkal már felírt modell összetett, de azon sokat lehet egyszerûsíteni, vagy vannak rá olyan módszerek, amellyel könnyen megoldható. Az idõigény itt már instabil, mert lehetõség nyílik és általában szükség is van keresésre, levezetésre, ami attól függõen, hogy mennyi zsákutcába fut a hallgató sok is lehet és kevés is.
+Konstrukció
+A konstrukciók nehézsége összeforr a redukciókéval. Ha nehézzé akarjuk tenni a feladatot, akkor nem engedjük, hogy azt egyszerû konstrukcióval is meg lehessen oldani és odafigyelünk, hogy a feladat ne legyen egy egyszerû, speciális eset. Tehát itt megszabhatjuk közvetlen, hogy mennyire legyen nehéz és idõigényes a konstrukció, azzal, hogy milyen konstrukciókra engedjük redukálni a feladatot.
+Itt nagyon lényeges a konstrukciók algoritmikus összetettsége, mert ez fogja meghatározni, hogy mennyire lehet azt levezetni, vagy esetleg még találgatni is.
+Implementáció
+Ennek nehézsége nagyban függ a végeredmény nagyságától, a konstrukciók elvégzésének hosszától. Ha sok számolás kell, akkor nehezebb az implementáció és könnyebb hibázni.
+Ettõl függ az is, hogy mennyire lehet találgatni.
+ 
+A feladatok nehézségének szabályozása
+Bármilyen kisebb célra is fókuszálunk a feladatok kapcsán, minden esetben fontos, hogy a hallgató a feladatok által a célok felé haladjon, azokat egyre jobban megközelítse. A hallgató nem kaphat túl könnyû feladatot, de túl nehezet sem. Tehát döntenünk kell, hogy egy adott hallgatónak mikor, milyen feladatokat adunk, hogy fejlesszük. Ha ezt egy programmal szeretnénk megtenni egy e-learning rendszerben, akkor több lehetõségünk is van, íme pár:
+Statikus fejlõdési fa
+Ennél a modellnél minden feladattípushoz meghatározzuk, hogy mik az elõfeltételei. Elõször csak olyan feladatok közül kap feladatot a hallgató amelyek könnyûek és nincs elõfeltételük. Erre egy fát építünk fel, amelyben felírjuk a típusokat, és hogy a típusnak mik a feltételei.
+Ez nagyon egyszerû és hatékony is, hiszen így a feladatok nehézségét a hallgató tudásához tudjuk egyeztetni. Ilyet terveztem az e-learning rendszerhez, de végül idõ hiányában ez nem kerül implementálásra.
+Statisztikai módszerek
+Az elõzõ módszernél azt az állítást, hogy a hallgató meg tud oldani egy feladatot, feltéve, hogy azok elõfeltételeit meg tudja oldani a fa készítõjének személyes tapasztalataira alapoztuk. De ezen elõfeltételek statisztikai módszerekkel is felépíthetjük. Ha megfelelõ mennyiségû adatunk van arról, hogy milyen feladatokat mely hallgató mennyi idõ alatt oldotta meg, akkor ebbõl akár ebbõl tetszõleges statisztikai módszerekkel (akár neurális hálókkal) meg tudjuk becsülni, hogy melyek azok a feladatok, amelyek egy hallgatónak pont megfelelõ nehézségûek, de akár egy fejlõdési fát is fölépíthetünk az adatokból.
+Ez egy érdekes módszer és valószínûleg gyakorlatban ez lenne a leghatékonyabb.
+Feladatmegoldási modellel történõ finomítás
+A statisztikai módszerekkel kontrasztban, elkezdhetjük a megoldási folyamatot apróbb részekre bontani, ezek egyrészt a már fentebb ismertetett általános modellek, másrészt magukat a feladatokat is atomjaikra tudjuk bontani.
+Ilyen például, hogy a hallgató képes-e felismerni, hogy két automatát egyszerre mûködtetve az állapotaikat egy automataként is modellezheti, vagy hogy egy bizonyos betû számolása során a releváns információk véges halmazból tevõdnek ki, és ezek megfeleltethetõek állapotoknak.
+Ez a módszer nagyon bonyolult, és bár elméletileg ez lenne a legerõsebb, a kivitelezés összetettsége miatt valószínûleg a statisztikai módszerek jobb eredményt adnak.
+
+ 
+A feladatok sokszínûségének növelésérõl
+Természetes fogalomtér
+String/betû, számok, állítások
+Új típusok
+Kézi
+Modellváltós típusok
+Automatikus
+Emergens típusok
+ 
+A feladatgeneráló rendszerek elõnyei a hagyományos módszerekkel szemben
+Minden speciális eset lefedése
+Személyre szabott progresszió
+Könnyebb javítás, digitalizált rendszer
+ 
+Programozástechnikai nehézségek és tapasztalatok
+

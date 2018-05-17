@@ -1,0 +1,21 @@
+\select@language {magyar} \contentsline {section}{Feladatki\IeC {\'\i }r\IeC {\'a}s}{3}
+\select@language {magyar} \contentsline {section}{Tartalmi \IeC {\"o}sszefoglal\IeC {\'o}}{4}
+\select@language {magyar} \contentsline {section}{Bevezet\IeC {\'e}s}{5}
+\select@language {magyar} \contentsline {chapter}{\numberline {1}Egy tal\IeC {\'a}l\IeC {\'o} c\IeC {\'\i }m}{6}
+\select@language {magyar} \contentsline {section}{\numberline {1.1}Alc\IeC {\'\i }m}{6}
+\select@language {magyar} \contentsline {subsection}{\numberline {1.1.1}Al-al c\IeC {\'\i }m}{6}
+\select@language {magyar} \contentsline {subsection}{\numberline {1.1.2}M\IeC {\'a}sik}{6}
+\select@language {magyar} \contentsline {subsection}{\numberline {1.1.3}Harmadik}{6}
+\select@language {magyar} \contentsline {section}{\numberline {1.2}Mindj\IeC {\'a}rt v\IeC {\'e}ge a fejezetnek}{6}
+\select@language {magyar} \contentsline {chapter}{\numberline {2}Hossz\IeC {\'u}}{7}
+\select@language {magyar} \contentsline {section}{\numberline {2.1}R\IeC {\'e}szletek}{7}
+\select@language {magyar} \contentsline {chapter}{\numberline {3}Egyebek}{9}
+\select@language {magyar} \contentsline {section}{\numberline {3.1}K\IeC {\"o}rnyezetek}{9}
+\select@language {magyar} \contentsline {section}{\numberline {3.2}List\IeC {\'a}k}{10}
+\select@language {magyar} \contentsline {section}{\numberline {3.3}Egy t\IeC {\'a}bl\IeC {\'a}zat \IeC {\'e}s egy \IeC {\'a}bra}{11}
+\select@language {magyar} \contentsline {chapter}{\numberline {4}F\IeC {\"u}ggel\IeC {\'e}k}{13}
+\select@language {magyar} \contentsline {section}{\numberline {4.1}A program forr\IeC {\'a}sk\IeC {\'o}dja}{13}
+\select@language {magyar} \ 
+\select@language {magyar} \contentsline {section}{Nyilatkozat}{14}
+\select@language {magyar} \contentsline {section}{K\IeC {\"o}sz\IeC {\"o}netnyilv\IeC {\'a}n\IeC {\'\i }t\IeC {\'a}s}{15}
+\select@language {magyar} \contentsline {section}{Irodalomjegyz\IeC {\'e}k}{16}

@@ -1,0 +1,234 @@
+Feladat: Adj meg olyan {a,b} abc-jû automatát amely a következõt ismeri fel: szó, ami baa-val kezdõdik!
+Felismert szavak például:
+baaaaa baaaab baaaa baaaba baaabb baaab baaa baabaa baabab baaba baabba baabbb baabb baab baa 
+Egy megoldás:
+Number of states = 5
+Start state = q0
+State transitions:
+q0 --(a)--> q4
+q0 --(b)--> q1
+q1 --(a)--> q2
+q1 --(b)--> q4
+q2 --(a)--> q3
+q2 --(b)--> q4
+q3 --(a)--> q3
+q3 --(b)--> q3
+q4 --(a)--> q4
+q4 --(b)--> q4
+Goal states: 
+q3
+
+Feladat: Adj meg olyan {a,b} abc-jû automatát amely a következõt ismeri fel: szó, amelyben minden b-t b követ vagy |W|a - |W|b páratlan számú!
+Felismert szavak például:
+aaaaaa aaaaa aaaab aaaa aaaba aaabb aaa aabaa aabab aabba aabbb aab aa abaaa abaab ababa ababb aba abbaa abbab abbba abbbb abb a baaaa baaab baaba baabb baa babaa babab babba babbb bab bbaaa bbaab bbaba bbabb bba bbbaa bbbab bbbba bbbbb bbb b  
+Egy megoldás:
+Number of states = 4
+Start state = q0
+State transitions:
+q0 --(a)--> q3
+q0 --(b)--> q1
+q1 --(a)--> q2
+q1 --(b)--> q2
+q2 --(a)--> q1
+q2 --(b)--> q1
+q3 --(a)--> q0
+q3 --(b)--> q2
+Goal states: 
+q0,q1,q3
+
+Feladat: Adj meg olyan {a,b} abc-jû automatát amely a következõt ismeri fel: szó, ami tartalmaz aaa-t!
+Felismert szavak például:
+aaaaaa aaaaab aaaaa aaaaba aaaabb aaaab aaaa aaabaa aaabab aaaba aaabba aaabbb aaabb aaab aaa aabaaa abaaaa abaaab abaaa abbaaa baaaaa baaaab baaaa baaaba baaabb baaab baaa babaaa bbaaaa bbaaab bbaaa bbbaaa 
+Egy megoldás:
+Number of states = 4
+Start state = q0
+State transitions:
+q0 --(a)--> q1
+q0 --(b)--> q0
+q1 --(a)--> q2
+q1 --(b)--> q0
+q2 --(a)--> q3
+q2 --(b)--> q0
+q3 --(a)--> q3
+q3 --(b)--> q3
+Goal states: 
+q3
+
+Feladat: Adj meg olyan {a,b} abc-jû automatát amely a következõt ismeri fel: szó, amelyben bármely 1 egymás utáni betû tartalmaz páros számú b betût vagy legfeljebb 2 egymás utáni bb-bõl áll!
+Felismert szavak például:
+aaaaaa aaaaa aaaa aaa aa a bbbb bb  
+Egy megoldás:
+Number of states = 7
+Start state = q0
+State transitions:
+q0 --(a)--> q6
+q0 --(b)--> q1
+q1 --(a)--> q5
+q1 --(b)--> q2
+q2 --(a)--> q5
+q2 --(b)--> q3
+q3 --(a)--> q5
+q3 --(b)--> q4
+q4 --(a)--> q5
+q4 --(b)--> q5
+q5 --(a)--> q5
+q5 --(b)--> q5
+q6 --(a)--> q6
+q6 --(b)--> q5
+Goal states: 
+q0,q2,q4,q6
+
+Feladat: Adj meg olyan {a,b} abc-jû automatát amely a következõt ismeri fel: szó, ami baa-ra végzõdik vagy tartalmaz legalább 2 ab-t vagy minden b-t a követ!
+Felismert szavak például:
+aaaaaa aaaaa aaaaba aaaa aaabaa aaabab aaaba aaa aabaaa aabaab aabaa aababa aababb aabab aaba aabbaa aabbab aa abaaaa abaaab abaaa abaaba abaabb abaab abaa ababaa ababab ababa ababba ababbb ababb abab aba abbaab abbaa abbaba abbabb abbab abbbaa abbbab a baaaaa baaaa baaaba baaa baabaa baabab baaba baa babaaa babaab 
+Egy megoldás:
+Number of states = 13
+Start state = q0
+State transitions:
+q0 --(a)--> q11
+q0 --(b)--> q1
+q1 --(a)--> q11
+q1 --(b)--> q2
+q2 --(a)--> q3
+q2 --(b)--> q2
+q3 --(a)--> q9
+q3 --(b)--> q4
+q4 --(a)--> q5
+q4 --(b)--> q4
+q5 --(a)--> q7
+q5 --(b)--> q6
+q6 --(a)--> q6
+q6 --(b)--> q6
+q7 --(a)--> q8
+q7 --(b)--> q6
+q8 --(a)--> q8
+q8 --(b)--> q6
+q9 --(a)--> q10
+q9 --(b)--> q4
+q10 --(a)--> q10
+q10 --(b)--> q4
+q11 --(a)--> q11
+q11 --(b)--> q12
+q12 --(a)--> q6
+q12 --(b)--> q4
+Goal states: 
+q0,q6,q7,q9,q11
+
+Feladat: Adj meg olyan {a,b} abc-jû automatát amely a következõt ismeri fel: szó, amelyben bármely 1 egymás utáni betû tartalmaz páratlan számú b betût vagy minden a-t a követ vagy aaa-val kezdõdik!
+Felismert szavak például:
+aaaaaa aaaaab aaaaa aaaaba aaaabb aaaab aaaa aaabaa aaabab aaaba aaabba aaabbb aaabb aaab aaa bbbbbb bbbbb bbbb bbb bb b  
+Egy megoldás:
+Number of states = 6
+Start state = q0
+State transitions:
+q0 --(a)--> q3
+q0 --(b)--> q1
+q1 --(a)--> q2
+q1 --(b)--> q1
+q2 --(a)--> q2
+q2 --(b)--> q2
+q3 --(a)--> q4
+q3 --(b)--> q2
+q4 --(a)--> q5
+q4 --(b)--> q2
+q5 --(a)--> q5
+q5 --(b)--> q5
+Goal states: 
+q0,q1,q5
+
+Feladat: Adj meg olyan {a,b} abc-jû automatát amely a következõt ismeri fel: szó, ami páratlan számú egymás utáni abb-bõl áll és |W|a páratlan számú!
+Felismert szavak például:
+abb 
+Egy megoldás:
+Number of states = 7
+Start state = q0
+State transitions:
+q0 --(a)--> q2
+q0 --(b)--> q1
+q1 --(a)--> q1
+q1 --(b)--> q1
+q2 --(a)--> q1
+q2 --(b)--> q3
+q3 --(a)--> q1
+q3 --(b)--> q4
+q4 --(a)--> q5
+q4 --(b)--> q1
+q5 --(a)--> q1
+q5 --(b)--> q6
+q6 --(a)--> q1
+q6 --(b)--> q0
+Goal states: 
+q4
+
+Feladat: Adj meg olyan {a,b} abc-jû automatát amely a következõt ismeri fel: szó, ami ab-vel kezdõdik és abb-vel kezdõdik és b-re végzõdik!
+Felismert szavak például:
+abbaab abbabb abbab abbbab abbbbb abbbb abbb abb 
+Egy megoldás:
+Number of states = 6
+Start state = q0
+State transitions:
+q0 --(a)--> q2
+q0 --(b)--> q1
+q1 --(a)--> q1
+q1 --(b)--> q1
+q2 --(a)--> q1
+q2 --(b)--> q3
+q3 --(a)--> q1
+q3 --(b)--> q4
+q4 --(a)--> q5
+q4 --(b)--> q4
+q5 --(a)--> q5
+q5 --(b)--> q4
+Goal states: 
+q4
+
+Feladat: Adj meg olyan {a,b} abc-jû automatát amely a következõt ismeri fel: szó, amelyben bármely 1 egymás utáni betû tartalmaz 3-al oszható a betût vagy tartalmaz páros számú baa-t vagy tartalmaz páros számú b-t!
+Felismert szavak például:
+aaaaaa aaaaab aaaaa aaaaba aaaabb aaaab aaaa aaabab aaaba aaabba aaabbb aaabb aaab aaa aabaab aababa aababb aabab aaba aabbaa aabbab aabba aabbba aabbbb aabbb aabb aab aa abaaab abaaba abaab ababaa ababab ababa ababba ababbb ababb abab aba abbaaa abbaa abbaba abbabb abbab abba abbbab abbba abbbba abbbbb abbbb abbb 
+Egy megoldás:
+Number of states = 12
+Start state = q0
+State transitions:
+q0 --(a)--> q0
+q0 --(b)--> q1
+q1 --(a)--> q10
+q1 --(b)--> q2
+q2 --(a)--> q3
+q2 --(b)--> q1
+q3 --(a)--> q4
+q3 --(b)--> q1
+q4 --(a)--> q4
+q4 --(b)--> q5
+q5 --(a)--> q8
+q5 --(b)--> q6
+q6 --(a)--> q7
+q6 --(b)--> q5
+q7 --(a)--> q0
+q7 --(b)--> q5
+q8 --(a)--> q9
+q8 --(b)--> q6
+q9 --(a)--> q9
+q9 --(b)--> q2
+q10 --(a)--> q11
+q10 --(b)--> q2
+q11 --(a)--> q11
+q11 --(b)--> q6
+Goal states: 
+q0,q1,q2,q3,q4,q6,q7,q9,q10
+
+Feladat: Adj meg olyan {a,b} abc-jû automatát amely a következõt ismeri fel: szó, amelyben |W|a 3-al oszható!
+Felismert szavak például:
+aaaaaa aaabbb aaabb aaab aaa aababb aabab aaba aabbab aabba aabbba abaabb abaab abaa ababab ababa ababba abbaab abbaa abbaba abbbaa baaabb baaab baaa baabab baaba baabba babaab babaa bababa babbaa bbaaab bbaaa bbaaba bbabaa bbbaaa bbbbbb bbbbb bbbb bbb bb b  
+Egy megoldás:
+Number of states = 3
+Start state = q0
+State transitions:
+q0 --(a)--> q1
+q0 --(b)--> q0
+q1 --(a)--> q2
+q1 --(b)--> q1
+q2 --(a)--> q0
+q2 --(b)--> q2
+Goal states: 
+q0
+

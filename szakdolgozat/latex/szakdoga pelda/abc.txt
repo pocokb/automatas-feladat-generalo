@@ -1,0 +1,277 @@
+Feladat: Adj meg olyan {a,b,c} abc-jû automatát amely a következõt ismeri fel: szó, ami pontosan 2 egymás utáni aab-bõl áll!
+Felismert szavak például:
+aabaab 
+Egy megoldás:
+Number of states = 8
+Start state = q0
+State transitions:
+q0 --(a)--> q2
+q0 --(b)--> q1
+q0 --(c)--> q1
+q1 --(a)--> q1
+q1 --(b)--> q1
+q1 --(c)--> q1
+q2 --(a)--> q3
+q2 --(b)--> q1
+q2 --(c)--> q1
+q3 --(a)--> q1
+q3 --(b)--> q4
+q3 --(c)--> q1
+q4 --(a)--> q5
+q4 --(b)--> q1
+q4 --(c)--> q1
+q5 --(a)--> q6
+q5 --(b)--> q1
+q5 --(c)--> q1
+q6 --(a)--> q1
+q6 --(b)--> q7
+q6 --(c)--> q1
+q7 --(a)--> q1
+q7 --(b)--> q1
+q7 --(c)--> q1
+Goal states: 
+q7
+
+Feladat: Adj meg olyan {a,b,c} abc-jû automatát amely a következõt ismeri fel: szó, ami tartalmaz ab-t és tartalmaz b-t!
+Felismert szavak például:
+aaaaab aaaaba aaaabb aaaabc aaaab aaabaa aaabab aaabac aaaba aaabba aaabbb aaabbc aaabb aaabca aaabcb aaabcc aaabc aaab aaacab aabaaa aabaab aabaac aabaa aababa aababb aababc aabab aabaca aabacb aabacc aabac aaba aabbaa aabbab aabbac aabba aabbba aabbbb aabbbc aabbb aabbca aabbcb aabbcc aabbc aabb aabcaa aabcab aabcac aabca aabcba aabcbb 
+Egy megoldás:
+Number of states = 3
+Start state = q0
+State transitions:
+q0 --(a)--> q1
+q0 --(b)--> q0
+q0 --(c)--> q0
+q1 --(a)--> q1
+q1 --(b)--> q2
+q1 --(c)--> q0
+q2 --(a)--> q2
+q2 --(b)--> q2
+q2 --(c)--> q2
+Goal states: 
+q2
+
+Feladat: Adj meg olyan {a,b,c} abc-jû automatát amely a következõt ismeri fel: szó, amelyre nem igaz, hogy páros számú egymás utáni abb-bõl áll és pontosan 1 egymás utáni cca-ból áll!
+Felismert szavak például:
+cca 
+Egy megoldás:
+Number of states = 5
+Start state = q0
+State transitions:
+q0 --(a)--> q4
+q0 --(b)--> q4
+q0 --(c)--> q1
+q1 --(a)--> q4
+q1 --(b)--> q4
+q1 --(c)--> q2
+q2 --(a)--> q3
+q2 --(b)--> q4
+q2 --(c)--> q4
+q3 --(a)--> q4
+q3 --(b)--> q4
+q3 --(c)--> q4
+q4 --(a)--> q4
+q4 --(b)--> q4
+q4 --(c)--> q4
+Goal states: 
+q3
+
+Feladat: Adj meg olyan {a,b,c} abc-jû automatát amely a következõt ismeri fel: szó, amelyre nem igaz, hogy |W|a + |W|b páratlan számú vagy nem igaz, hogy legfeljebb 2 egymás utáni a-ból áll vagy tartalmaz c-t!
+Felismert szavak például:
+aaaaaa aaaaab aaaaac aaaaa aaaaba aaaabb aaaabc aaaab aaaaca aaaacb aaaacc aaaac aaaa aaabaa aaabab aaabac aaaba aaabba aaabbb aaabbc aaabb aaabca aaabcb aaabcc aaabc aaab aaacaa aaacab aaacac aaaca aaacba aaacbb aaacbc aaacb aaacca aaaccb aaaccc aaacc aaac aaa aabaaa aabaab aabaac aabaa aababa aababb aababc aabab aabaca aabacb aabacc 
+Egy megoldás:
+Number of states = 3
+Start state = q0
+State transitions:
+q0 --(a)--> q2
+q0 --(b)--> q1
+q0 --(c)--> q1
+q1 --(a)--> q1
+q1 --(b)--> q1
+q1 --(c)--> q1
+q2 --(a)--> q1
+q2 --(b)--> q1
+q2 --(c)--> q1
+Goal states: 
+q0,q1
+
+Feladat: Adj meg olyan {a,b,c} abc-jû automatát amely a következõt ismeri fel: szó, ami tartalmaz legfeljebb 1 caa-t és c-vel kezdõdik!
+Felismert szavak például:
+caaaaa caaaab caaaac caaaa caaaba caaabb caaabc caaab caaaca caaacb caaacc caaac caaa caabaa caabab caabac caaba caabba caabbb caabbc caabb caabca caabcb caabcc caabc caab caacab caacac caaca caacba caacbb caacbc caacb caacca caaccb caaccc caacc caac caa cabaaa cabaab cabaac cabaa cababa cababb cababc cabab cabaca cabacb cabacc cabac 
+Egy megoldás:
+Number of states = 8
+Start state = q0
+State transitions:
+q0 --(a)--> q7
+q0 --(b)--> q7
+q0 --(c)--> q1
+q1 --(a)--> q3
+q1 --(b)--> q2
+q1 --(c)--> q1
+q2 --(a)--> q2
+q2 --(b)--> q2
+q2 --(c)--> q1
+q3 --(a)--> q4
+q3 --(b)--> q2
+q3 --(c)--> q1
+q4 --(a)--> q4
+q4 --(b)--> q4
+q4 --(c)--> q5
+q5 --(a)--> q6
+q5 --(b)--> q4
+q5 --(c)--> q5
+q6 --(a)--> q7
+q6 --(b)--> q4
+q6 --(c)--> q5
+q7 --(a)--> q7
+q7 --(b)--> q7
+q7 --(c)--> q7
+Goal states: 
+q1,q2,q3,q4,q5,q6
+
+Feladat: Adj meg olyan {a,b,c} abc-jû automatát amely a következõt ismeri fel: szó, ami páratlan számú egymás utáni bbc-bõl áll!
+Felismert szavak például:
+bbc 
+Egy megoldás:
+Number of states = 7
+Start state = q0
+State transitions:
+q0 --(a)--> q6
+q0 --(b)--> q1
+q0 --(c)--> q6
+q1 --(a)--> q6
+q1 --(b)--> q2
+q1 --(c)--> q6
+q2 --(a)--> q6
+q2 --(b)--> q6
+q2 --(c)--> q3
+q3 --(a)--> q6
+q3 --(b)--> q4
+q3 --(c)--> q6
+q4 --(a)--> q6
+q4 --(b)--> q5
+q4 --(c)--> q6
+q5 --(a)--> q6
+q5 --(b)--> q6
+q5 --(c)--> q0
+q6 --(a)--> q6
+q6 --(b)--> q6
+q6 --(c)--> q6
+Goal states: 
+q3
+
+Feladat: Adj meg olyan {a,b,c} abc-jû automatát amely a következõt ismeri fel: szó, amelyben |W|a 2-vel oszható!
+Felismert szavak például:
+aaaaaa aaaabb aaaabc aaaab aaaacb aaaacc aaaac aaaa aaabab aaabac aaaba aaabba aaabca aaacab aaacac aaaca aaacba aaacca aabaab aabaac aabaa aababa aabaca aabbaa aabbbb aabbbc aabbb aabbcb aabbcc aabbc aabb aabcaa aabcbb aabcbc aabcb aabccb aabccc aabcc aabc aab aacaab aacaac aacaa aacaba aacaca aacbaa aacbbb aacbbc aacbb aacbcb aacbcc 
+Egy megoldás:
+Number of states = 2
+Start state = q0
+State transitions:
+q0 --(a)--> q1
+q0 --(b)--> q0
+q0 --(c)--> q0
+q1 --(a)--> q0
+q1 --(b)--> q1
+q1 --(c)--> q1
+Goal states: 
+q0
+
+Feladat: Adj meg olyan {a,b,c} abc-jû automatát amely a következõt ismeri fel: szó, ami legfeljebb 1 egymás utáni abc-bõl áll!
+Felismert szavak például:
+abc 
+Egy megoldás:
+Number of states = 5
+Start state = q0
+State transitions:
+q0 --(a)--> q2
+q0 --(b)--> q1
+q0 --(c)--> q1
+q1 --(a)--> q1
+q1 --(b)--> q1
+q1 --(c)--> q1
+q2 --(a)--> q1
+q2 --(b)--> q3
+q2 --(c)--> q1
+q3 --(a)--> q1
+q3 --(b)--> q1
+q3 --(c)--> q4
+q4 --(a)--> q1
+q4 --(b)--> q1
+q4 --(c)--> q1
+Goal states: 
+q4
+
+Feladat: Adj meg olyan {a,b,c} abc-jû automatát amely a következõt ismeri fel: szó, ami legfeljebb 1 egymás utáni ccb-bõl áll!
+Felismert szavak például:
+ccb 
+Egy megoldás:
+Number of states = 5
+Start state = q0
+State transitions:
+q0 --(a)--> q4
+q0 --(b)--> q4
+q0 --(c)--> q1
+q1 --(a)--> q4
+q1 --(b)--> q4
+q1 --(c)--> q2
+q2 --(a)--> q4
+q2 --(b)--> q3
+q2 --(c)--> q4
+q3 --(a)--> q4
+q3 --(b)--> q4
+q3 --(c)--> q4
+q4 --(a)--> q4
+q4 --(b)--> q4
+q4 --(c)--> q4
+Goal states: 
+q3
+
+Feladat: Adj meg olyan {a,b,c} abc-jû automatát amely a következõt ismeri fel: szó, ami tartalmaz legfeljebb 2 bcc-t vagy bc-vel kezdõdik vagy c-vel kezdõdik!
+Felismert szavak például:
+aaaaaa aaaaab aaaaac aaaaa aaaaba aaaabb aaaabc aaaab aaaaca aaaacb aaaacc aaaac aaaa aaabaa aaabab aaabac aaaba aaabba aaabbb aaabbc aaabb aaabca aaabcb aaabcc aaabc aaab aaacaa aaacab aaacac aaaca aaacba aaacbb aaacbc aaacb aaacca aaaccb aaaccc aaacc aaac aaa aabaaa aabaab aabaac aabaa aababa aababb aababc aabab aabaca aabacb aabacc 
+Egy megoldás:
+Number of states = 13
+Start state = q0
+State transitions:
+q0 --(a)--> q12
+q0 --(b)--> q2
+q0 --(c)--> q1
+q1 --(a)--> q1
+q1 --(b)--> q1
+q1 --(c)--> q1
+q2 --(a)--> q12
+q2 --(b)--> q3
+q2 --(c)--> q1
+q3 --(a)--> q12
+q3 --(b)--> q3
+q3 --(c)--> q4
+q4 --(a)--> q12
+q4 --(b)--> q3
+q4 --(c)--> q5
+q5 --(a)--> q5
+q5 --(b)--> q6
+q5 --(c)--> q5
+q6 --(a)--> q5
+q6 --(b)--> q6
+q6 --(c)--> q7
+q7 --(a)--> q5
+q7 --(b)--> q6
+q7 --(c)--> q8
+q8 --(a)--> q8
+q8 --(b)--> q9
+q8 --(c)--> q8
+q9 --(a)--> q8
+q9 --(b)--> q9
+q9 --(c)--> q10
+q10 --(a)--> q8
+q10 --(b)--> q9
+q10 --(c)--> q11
+q11 --(a)--> q11
+q11 --(b)--> q11
+q11 --(c)--> q11
+q12 --(a)--> q12
+q12 --(b)--> q3
+q12 --(c)--> q12
+Goal states: 
+q0,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q12
+

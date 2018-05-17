@@ -1,0 +1,9 @@
+\select@language {magyar} \contentsline {section}{Feladatki\IeC {\'\i }r\IeC {\'a}s}{3}
+\select@language {magyar} \contentsline {section}{Tartalmi \IeC {\"o}sszefoglal\IeC {\'o}}{4}
+\select@language {magyar} \contentsline {section}{Bevezet\IeC {\'e}s}{5}
+\select@language {magyar} \contentsline {chapter}{\numberline {1}\IeC {\'A}ltal\IeC {\'a}nos fogalmak \IeC {\'e}s jel\IeC {\"o}l\IeC {\'e}sek}{6}
+\select@language {magyar} \contentsline {section}{\numberline {1.1}\IeC {\'A}ltal\IeC {\'a}nos jel\IeC {\"o}l\IeC {\'e}sek}{6}
+\select@language {magyar} \contentsline {section}{\numberline {1.2}\IeC {\'A}b\IeC {\'e}c\IeC {\'e}k \IeC {\'e}s szavak}{6}
+\select@language {magyar} \contentsline {section}{\numberline {1.3}Nyelvek}{7}
+\select@language {magyar} \contentsline {section}{\numberline {1.4}Helyettes\IeC {\'\i }t\IeC {\'e}sek \IeC {\'e}s morfizmusok}{8}
+\select@language {magyar} \contentsline {chapter}{\numberline {2}Form\IeC {\'a}lis k\IeC {\"o}vetkeztet\IeC {\'e}si rendszer regul\IeC {\'a}ris kifejez\IeC {\'e}sekre}{9}
